@@ -1,7 +1,8 @@
 import { Component } from "react";
 import BookList from "./BookList";
 import BookDetail from "./BookDetail";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Button } from "react-bootstrap";
+import withRouter from "../library/withRouter";
 
 class BookStore extends Component {
   state = {
@@ -29,6 +30,7 @@ class BookStore extends Component {
 
   render() {
     return (
+      <>
       <Row>
         <Col md={4}>
           <BookList
@@ -40,11 +42,15 @@ class BookStore extends Component {
         <Col md={8}>
           <BookDetail
             bookSelected={this.state.bookSelected}
+            addToCart={this.props.addToCart}
+            // this is called PROP DRILLING
           />
         </Col>
       </Row>
+      <Button onClick={() => this.props.navigate('/strive')}>Click for /strive</Button>
+      </>
     );
   }
 }
 
-export default BookStore;
+export default withRouter(BookStore);
